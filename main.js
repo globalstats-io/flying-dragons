@@ -3,9 +3,8 @@ var mainState = {
     preload: function() {
         // This function will be executed at the beginning
         // That's where we load the images and sounds
-
-        game.load.image('bird', 'assets/bird.png');
-        game.load.image('pipe', 'assets/pipe.png');
+        game.load.image('bird', 'assets/flappy_bird.png');
+        game.load.image('pipe', 'assets/pipe1.png');
     },
 
     create: function() {
@@ -28,7 +27,7 @@ var mainState = {
         game.scale.pageAlignVertically = true;
 
         // Change the background color of the game to blue
-        game.stage.backgroundColor = '#71c5cf';
+        game.stage.backgroundColor = '#4da6ff';
 
         // Set the physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -53,7 +52,7 @@ var mainState = {
 
         this.pipes = game.add.group();
 
-        this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
+        this.timer = game.time.events.loop(2000, this.addRowOfPipes, this);
 
         this.score = 0;
         this.labelScore = game.add.text(20, 20, "0",
@@ -68,7 +67,7 @@ var mainState = {
 
         // If the bird is out of the screen (too high or too low)
         // Call the 'restartGame' function
-        if (this.bird.y < 0 || this.bird.y > 490)
+        if (this.bird.y < 0 || this.bird.y > 600)
             this.restartGame();
 
         game.physics.arcade.overlap(
@@ -91,6 +90,9 @@ var mainState = {
 
 // Restart the game
     restartGame: function() {
+        if (this.score > 0)
+            globalstats.update("a1rwulf", 'highscore', this.score);
+
         // Start the 'main' state, which restarts the game
         game.state.start('main');
     },
@@ -120,9 +122,9 @@ var mainState = {
 
         // Add the 6 pipes
         // With one big hole at position 'hole' and 'hole + 1'
-        for (var i = 0; i < 8; i++)
-            if (i != hole && i != hole + 1)
-                this.addOnePipe(400, i * 60 + 10);
+        for (var i = 0; i < 10; i++)
+            if (i != hole -1 && i != hole && i != hole + 1 && i != hole +2)
+                this.addOnePipe(800, i * 60);
 
         this.score += 1;
         this.labelScore.text = this.score;
@@ -147,8 +149,13 @@ var mainState = {
     },
 };
 
-// Initialize Phaser, and create a 400px by 490px game
-var game = new Phaser.Game(400, 490);
+function start() {
+    // Initialize Phaser, and create a 400px by 490px game
+    game = new Phaser.Game(800, 600);
 
-// Add and start the 'main' state to start the game
-game.state.add('main', mainState, true);
+    // Add and start the 'main' state to start the game
+    game.state.add('main', mainState, true);
+
+    globalstats.init('geDUbUS6A6Kf7I8TmdMB3BN8KAM24hTkvwfHr7O1','zglhpeDC1eFC2OnCApHSi1nPh5goTiDszYKYdnAf');
+    globalstats.create("a1rwulf", 'highscore', 0);
+}
