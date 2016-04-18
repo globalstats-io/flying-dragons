@@ -49,10 +49,12 @@ var globalstats = {
             dataType: 'text',
             processData: false,
             contentType: 'application/json',
+            async: false,
             success: function (data)
             {
                 try {
                     me.current_gtd = JSON.parse(data);
+                    console.log('Sucessfully created GTD');
                     console.log(me.current_gtd);
                 }
                 catch(e) {
@@ -78,15 +80,16 @@ var globalstats = {
             dataType: 'text',
             processData: false,
             contentType: 'application/json',
+            async: false,
             success: function (data)
             {
                 try {
                     console.log('Sucessfully updated GTD');
+                    console.log(JSON.parse(data));
                 }
                 catch(e) {
-                    console.log('Could not parse access token');
+                    console.log('Could not parse update response');
                 }
-
             },
             error: function(req, status, ex)
             {
@@ -98,6 +101,9 @@ var globalstats = {
 
     get: function(gtd_id) {
         var me = this;
+        if (!gtd_id)
+            gtd_id = this.current_gtd._id;
+
         $.ajax({
             type: 'GET',
             url: 'https://api.globalstats.io/v1/statistics/' + gtd_id,
@@ -105,15 +111,16 @@ var globalstats = {
             dataType: 'text',
             processData: false,
             contentType: 'application/json',
+            async: false,
             success: function (data)
             {
                 try {
                     var tmp = JSON.parse(data);
-                    console.log(tmp);
                     console.log('Sucessfully retrieved GTD');
+                    console.log(tmp);
                 }
                 catch(e) {
-                    console.log('Could not parse access token');
+                    console.log('Could not parse get response');
                 }
 
             },
