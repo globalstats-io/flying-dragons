@@ -3,8 +3,8 @@ var mainState = {
     preload: function() {
         // This function will be executed at the beginning
         // That's where we load the images and sounds
-        game.load.image('bird', 'assets/images/flappy_bird.png');
-        game.load.image('pipe', 'assets/images/pipe1.png');
+        game.load.image('bird', 'assets/images/bird.png');
+        game.load.image('pipe', 'assets/images/pipe.png');
     },
 
     create: function() {
