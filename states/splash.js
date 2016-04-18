@@ -20,15 +20,14 @@ Splash.prototype = {
     loadFonts: function () {
         WebFontConfig = {
             custom: {
-                families: ['TheMinion'],
-                urls: ['assets/style/theminion.css']
+                families: ['Action'],
+                urls: ['assets/style/action_black.css']
             }
         }
     },
 
     init: function () {
         this.loadingBar = game.make.sprite(game.world.centerX-(400/2), 400, "loading");
-        //this.logo       = game.make.sprite(game.world.centerX, 200, 'brand');
         this.title      = game.make.text(game.world.centerX, 200, 'Loading...', {fill: 'white'});
         this.status     = game.make.text(game.world.centerX, 380, 'Loading...', {fill: 'white'});
         utils.centerGameObjects([this.title, this.status]);
@@ -36,7 +35,6 @@ Splash.prototype = {
 
     preload: function () {
         game.add.sprite(0, 0, 'stars');
-        //game.add.existing(this.logo).scale.setTo(0.5);
         game.add.existing(this.loadingBar);
         game.add.existing(this.status);
         game.add.existing(this.title);

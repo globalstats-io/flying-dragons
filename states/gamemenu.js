@@ -8,8 +8,8 @@ GameMenu.prototype = {
     },
 
     init: function() {
-        this.titleText = game.make.text(game.world.centerX, 100, "Flappy Birds", {
-            font: 'bold 60pt TheMinion',
+        this.titleText = game.make.text(game.world.centerX, 100, "FLAPPY BIRDS", {
+            font: 'bold 30pt Action',
             fill: '#FDFFB5',
             align: 'center'
         });
@@ -26,7 +26,7 @@ GameMenu.prototype = {
         game.add.sprite(0, 0, 'menu-bg');
         game.add.existing(this.titleText);
 
-        this.addMenuOption('Start', function () {
+        this.addMenuOption('START', function () {
             game.state.start("Game");
         });
 

@@ -3,13 +3,13 @@ var GameOver = function() {};
 GameOver.prototype = {
 
     menuConfig: {
-        startY: 260,
+        startY: 320,
         startX: 'center'
     },
 
     init: function(score) {
-        this.gameoverText = game.make.text(game.world.centerX, 100, "Game Over", {
-            font: 'bold 60pt TheMinion',
+        this.gameoverText = game.make.text(game.world.centerX, 100, "GAME OVER", {
+            font: '40pt Action',
             fill: '#FDFFB5',
             align: 'center'
         });
@@ -17,8 +17,8 @@ GameOver.prototype = {
         this.gameoverText.anchor.set(0.5);
 
         this.score = score;
-        this.scoreText = game.make.text(game.world.centerX, 250, "Your score: " + this.score, {
-            font: '30pt Arial',
+        this.scoreText = game.make.text(game.world.centerX, 250, "YOUR SCORE - " + this.score, {
+            font: '20pt Action',
             fill: '#FDFFB5',
             align: 'center'
         });
@@ -27,7 +27,7 @@ GameOver.prototype = {
     },
 
     preload: function() {
-
+        this.optionCount = 1;
     },
 
     create: function() {
@@ -35,7 +35,13 @@ GameOver.prototype = {
         game.add.sprite(0, 0, 'menu-bg');
         game.add.existing(this.gameoverText);
         game.add.existing(this.scoreText);
+        globalstats.update('a1rwulf', 'highscore', this.score);
+        globalstats.get();
+
+        this.addMenuOption('RETRY', function () {
+            game.state.start("Game");
+        });
     }
 };
 
-Phaser.Utils.mixinPrototype(GameMenu.prototype, mixins);
+Phaser.Utils.mixinPrototype(GameOver.prototype, mixins);

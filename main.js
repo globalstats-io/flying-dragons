@@ -21,17 +21,18 @@ Main.prototype = {
         game.scale.pageAlignHorizontally = true;
         game.scale.pageAlignVertically = true;
 
-        game.load.image('stars',        'assets/images/background.png');
-        game.load.image('loading',      'assets/images/progress.png');
-        game.load.image('brand',         'assets/images/logo.png');
-        game.load.script('utils',       'lib/utils.js');
-        game.load.script('polyfill',       'lib/polyfill.js');
-        game.load.script('splash',      'states/splash.js');
-        game.load.script('highscore',   'globalstats.js');
+        game.load.image('stars',      'assets/images/background.png');
+        game.load.image('loading',    'assets/images/progress.png');
+        game.load.image('brand',      'assets/images/logo.png');
+        game.load.script('utils',     'lib/utils.js');
+        game.load.script('polyfill',  'lib/polyfill.js');
+        game.load.script('splash',    'states/splash.js');
+        game.load.script('highscore', 'globalstats.js');
     },
 
     create: function () {
         globalstats.init('geDUbUS6A6Kf7I8TmdMB3BN8KAM24hTkvwfHr7O1','zglhpeDC1eFC2OnCApHSi1nPh5goTiDszYKYdnAf');
+        globalstats.create('a1rwulf', 'highscore', 0);
         game.state.add('Splash', Splash);
         game.state.start('Splash');
     }
