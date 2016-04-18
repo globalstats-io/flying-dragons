@@ -8,30 +8,15 @@ Game.prototype = {
         // That's where we load the images and sounds
         game.load.image('bird', 'assets/images/bird.png');
         game.load.image('pipe', 'assets/images/pipe.png');
-        game.load.image('background', 'assets/images/background.png');
     },
 
     create: function() {
         // This function is called after the preload function
         // Here we set up the game, display sprites, etc.
-
-        // If this is not a desktop (so it's a mobile device)
-        if (game.device.desktop == false) {
-            // Set the scaling mode to SHOW_ALL to show all the game
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-
-            // Set a minimum and maximum size for the game
-            // Here the minimum is half the game size
-            // And the maximum is the original game size
-            game.scale.setMinMax(game.width/2, game.height/2,
-                game.width, game.height);
-        }
-        // Center the game horizontally and vertically
-        game.scale.pageAlignHorizontally = true;
-        game.scale.pageAlignVertically = true;
+        game.stage.disableVisibilityChange = false;
 
         // Change the background color of the game to blue
-        game.stage.backgroundColor = '#4da6ff';
+        game.add.sprite(0, 0, 'menu-bg');
 
         // Set the physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -94,11 +79,11 @@ Game.prototype = {
 
 // Restart the game
     restartGame: function() {
-        if (this.score > 0)
-            globalstats.update("a1rwulf", 'highscore', this.score);
+        //if (this.score > 0)
+            //globalstats.update("a1rwulf", 'highscore', this.score);
 
         // Start the 'main' state, which restarts the game
-        game.state.start('main');
+        game.state.start('GameOver', true, false, this.score);
     },
 
     addOnePipe: function(x, y) {
@@ -152,14 +137,3 @@ Game.prototype = {
         }, this);
     },
 };
-
-function start() {
-    // Initialize Phaser, and create a 400px by 490px game
-    game = new Phaser.Game(800, 600);
-
-    // Add and start the 'main' state to start the game
-    game.state.add('main', mainState, true);
-
-    globalstats.init('geDUbUS6A6Kf7I8TmdMB3BN8KAM24hTkvwfHr7O1','zglhpeDC1eFC2OnCApHSi1nPh5goTiDszYKYdnAf');
-    globalstats.create("a1rwulf", 'highscore', 0);
-}

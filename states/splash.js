@@ -3,17 +3,14 @@ var Splash = function () {};
 Splash.prototype = {
 
     loadScripts: function () {
-        //game.load.script('style', 'lib/style.js');
-        //game.load.script('mixins', 'lib/mixins.js');
+        game.load.script('style', 'lib/style.js');
+        game.load.script('mixins', 'lib/mixins.js');
         game.load.script('WebFont', 'vendor/webfontloader.js');
-        //game.load.script('gamemenu','states/GameMenu.js');
-        //game.load.script('game', 'states/Game.js');
-        //game.load.script('gameover','states/GameOver.js');
-        //game.load.script('credits', 'states/Credits.js');
-        //game.load.script('options', 'states/Options.js');
+        game.load.script('gamemenu','states/gamemenu.js');
+        game.load.script('game', 'states/game.js');
+        game.load.script('gameover','states/gameover.js');
     },
 
-    // varios freebies found from google image search
     loadImages: function () {
         game.load.image('menu-bg', 'assets/images/background.png');
         game.load.image('options-bg', 'assets/images/background.png');
@@ -53,14 +50,12 @@ Splash.prototype = {
     addGameStates: function () {
 
         game.state.add("GameMenu",GameMenu);
-        //game.state.add("Game",Game);
-        //game.state.add("GameOver",GameOver);
-        //game.state.add("Credits",Credits);
-        //game.state.add("Options",Options);
+        game.state.add("Game",Game);
+        game.state.add("GameOver",GameOver);
     },
 
     create: function() {
-        this.title.setText('Flappy Birds');
+        this.title.setText('Loading...');
         this.status.setText('Ready!');
         this.addGameStates();
 
