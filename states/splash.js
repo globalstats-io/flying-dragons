@@ -60,7 +60,7 @@ Splash.prototype = {
     },
 
     create: function() {
-        this.title.setText('Flappy Birds!');
+        this.title.setText('Flappy Birds');
         this.status.setText('Ready!');
         this.addGameStates();
 
