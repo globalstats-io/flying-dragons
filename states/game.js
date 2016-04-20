@@ -58,7 +58,7 @@ Game.prototype = {
 
         // If the bird is out of the screen (too high or too low)
         // Call the 'restartGame' function
-        if (this.bird.y < 0 || this.bird.y > 600)
+        if (this.bird.y < 0 || this.bird.y > 680)
             this.restartGame();
 
         game.physics.arcade.overlap(
@@ -130,6 +130,8 @@ Game.prototype = {
 
         // Set the alive property of the bird to false
         this.bird.alive = false;
+
+        game.add.tween(this.bird).to({angle: -80}, 200).start();
 
         // Prevent new pipes from appearing
         game.time.events.remove(this.timer);
