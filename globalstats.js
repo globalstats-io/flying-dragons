@@ -72,63 +72,69 @@ var globalstats = {
 
     update: function(username, gtd, score) {
         var me = this;
-        $.ajax({
-            type: 'PUT',
-            url: 'https://api.globalstats.io/v1/statistics/' + me.current_gtd._id,
-            headers: { 'Authorization': 'Bearer ' + me.at },
-            data: '{ "name": "' + username + '", "values": { "' + gtd + '":' + score + '} }',
-            dataType: 'text',
-            processData: false,
-            contentType: 'application/json',
-            async: false,
-            success: function (data)
-            {
-                try {
-                    console.log('Sucessfully updated GTD');
-                    console.log(JSON.parse(data));
-                }
-                catch(e) {
-                    console.log('Could not parse update response');
-                }
-            },
-            error: function(req, status, ex)
-            {
+        if (me.current_gtd)
+        {
+            $.ajax({
+                type: 'PUT',
+                url: 'https://api.globalstats.io/v1/statistics/' + me.current_gtd._id,
+                headers: { 'Authorization': 'Bearer ' + me.at },
+                data: '{ "name": "' + username + '", "values": { "' + gtd + '":' + score + '} }',
+                dataType: 'text',
+                processData: false,
+                contentType: 'application/json',
+                async: false,
+                success: function (data)
+                {
+                    try {
+                        console.log('Sucessfully updated GTD');
+                        console.log(JSON.parse(data));
+                    }
+                    catch(e) {
+                        console.log('Could not parse update response');
+                    }
+                },
+                error: function(req, status, ex)
+                {
 
-            },
-            timeout:60000
-        });
+                },
+                timeout:60000
+            });
+        }
     },
 
     get: function(gtd_id) {
         var me = this;
         if (!gtd_id)
-            gtd_id = this.current_gtd._id;
+            gtd_id = this.current_gtd ? this.current_gtd._id : null;
 
-        $.ajax({
-            type: 'GET',
-            url: 'https://api.globalstats.io/v1/statistics/' + gtd_id,
-            headers: { 'Authorization': 'Bearer ' + me.at },
-            dataType: 'text',
-            processData: false,
-            contentType: 'application/json',
-            async: false,
-            success: function (data)
-            {
-                try {
-                    var tmp = JSON.parse(data);
-                    console.log('Sucessfully retrieved GTD');
-                    console.log(tmp);
-                }
-                catch(e) {
-                    console.log('Could not parse get response');
-                }
+        if (gtd_id)
+        {
+            $.ajax({
+                type: 'GET',
+                url: 'https://api.globalstats.io/v1/statistics/' + gtd_id,
+                headers: { 'Authorization': 'Bearer ' + me.at },
+                dataType: 'text',
+                processData: false,
+                contentType: 'application/json',
+                async: false,
+                success: function (data)
+                {
+                    try {
+                        var tmp = JSON.parse(data);
+                        console.log('Sucessfully retrieved GTD');
+                        console.log(tmp);
+                    }
+                    catch(e) {
+                        console.log('Could not parse get response');
+                    }
 
-            },
-            error: function(req, status, ex)
-            {
+                },
+                error: function(req, status, ex)
+                {
 
-            },
-            timeout:60000
-        });
+                },
+                timeout:60000
+            });
+        }
     }
 };
