@@ -6,8 +6,9 @@ Game.prototype = {
     preload: function() {
         // This function will be executed at the beginning
         // That's where we load the images and sounds
-        game.load.image('bird', 'assets/images/bird.png');
+        //game.load.image('bird', 'assets/images/bird.png');
         game.load.image('pipe', 'assets/images/pipe.png');
+        game.load.spritesheet('bird', 'assets/images/dragon.png', 75, 75, 3);
     },
 
     create: function() {
@@ -23,6 +24,7 @@ Game.prototype = {
 
         // Display the bird at the position x=100 and y=245
         this.bird = game.add.sprite(100, 245, 'bird');
+        this.bird.animations.add('fly');
 
         // Add physics to the bird
         // Needed for: movements, gravity, collisions, etc.
@@ -71,6 +73,7 @@ Game.prototype = {
         if (this.bird.alive == false)
             return;
 
+        this.bird.animations.play('fly', 10, false);
         // Add a vertical velocity to the bird
         this.bird.body.velocity.y = -350;
 
